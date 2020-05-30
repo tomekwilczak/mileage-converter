@@ -14,20 +14,33 @@ const rl = readline.createInterface({
   output: process.stdout,
 });
 
+// Setting variables for options (strings)
+const convertMilesToKm = "Convert miles to kilometers";
+const convertKmToMiles = "Convert kilometers to miles";
+const convertMPGToLitres = "Convert MPG to l/km";
+
 rl.question(
-  "Choose option:\n1) Convert miles to KM\n2) Convert KM to miles\n3) Other\n\nEnter your choice:",
+  `\nWhat do you want to do?\n1) ${convertMilesToKm}\n2) ${convertKmToMiles}\n3) ${convertMPGToLitres}\n\nEnter your choice:`,
   function (answer) {
-    if (answer == "1") {
-      rl.question("What is the current mileage in miles? ", function (
+    if (answer == "") {
+      console.log("No choice has been made. Please enter the option number");
+      return answer;
+    }
+    if (answer == 1) {
+      console.log(`\nSelected option: ${convertMilesToKm}`);
+      sleep(500);
+      rl.question("\nWhat is the current mileage in miles? ", function (
         mileageMiles
       ) {
         mileageKilometres = mileageMiles * 1.609344;
         mileageKilometres = mileageKilometres.toFixed(0);
-        console.log(`Your current mileage is ${mileageKilometres} kilometres`);
+        console.log(
+          `\nYour current mileage is ${mileageKilometres} kilometres`
+        );
         process.exit(0);
       });
-    } else if (answer == "2") {
-      console.log(`\nSelected option: ${answer}: Convert KM to miles`);
+    } else if (answer == 2) {
+      console.log(`\nSelected option: ${convertKmToMiles}`);
       sleep(500);
       rl.question("\nWhat is the current mileage in kilometres? ", function (
         mileageMiles
@@ -38,8 +51,8 @@ rl.question(
         console.log(`\nYour current mileage is ${mileageKilometres} miles`);
         process.exit(0);
       });
-    } else if (answer == "3") {
-      console.log("Placeholder for Converter MPG to l/km");
+    } else if (answer == 3) {
+      console.log(`Placeholder for ${convertMPGToLitres}`);
       process.exit(0);
     } else {
       console.log(`\nSelected option: ${answer}`);
